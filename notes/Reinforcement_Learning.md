@@ -46,3 +46,45 @@ The agent and environment interact repeatedly:
 3. The environment transitions to a new state.
 4. The environment provides a reward and a new observation.
 5. The agent uses experience to improve its decision-making, depending on the learning algorithm.
+
+
+# PPO — 6 Core Concepts
+
+**1. Policy \(\pi(a\mid s)\)**  
+The strategy an agent uses to choose actions based on its current state.  
+*Example:* A robot chooses to move right with a 70% probability.
+
+**2. Reward \(r_t\)**  
+Immediate numerical feedback from the environment after an action.  
+*Example:* +5 for moving a block closer to its target.
+
+**3. Return \(G_t\)**  
+The cumulative future reward, usually discounted by \(\gamma\).
+
+\[
+G_t=r_t+\gamma G_{t+1}
+\]
+
+**4. Advantage \(A(s,a)\)**  
+Measures how much better or worse an action performs than expected.
+
+\[
+A(s,a)=Q(s,a)-V(s)
+\]
+
+Positive advantage generally encourages an action; negative advantage generally discourages it.
+
+**5. PPO Clipped Objective**  
+Compares new and old policy probabilities and discourages excessively large policy updates.
+
+\[
+r_t(\theta)=\frac{\pi_\theta(a_t\mid s_t)}{\pi_{\theta_{\text{old}}}(a_t\mid s_t)}
+\]
+
+**6. Actor and Critic**
+- **Actor:** Selects actions using the policy.
+- **Critic:** Estimates the expected future return from a state.
+
+### PPO Training Cycle
+
+Collect experience → Calculate advantages → Update actor and critic → Repeat.
