@@ -85,6 +85,29 @@ r_t(\theta)=\frac{\pi_\theta(a_t\mid s_t)}{\pi_{\theta_{\text{old}}}(a_t\mid s_t
 - **Actor:** Selects actions using the policy.
 - **Critic:** Estimates the expected future return from a state.
 
-### PPO Training Cycle
+# PPO Training Loop
 
-Collect experience → Calculate advantages → Update actor and critic → Repeat.
+**1. Collect Experience**  
+The agent interacts with the environment and stores transitions:
+
+\[
+(s_t,a_t,r_t,s_{t+1})
+\]
+
+**2. Calculate Advantages**  
+Uses rewards and value estimates to determine whether actions performed better or worse than expected. PPO commonly uses GAE.
+
+**3. Update the Actor**  
+Uses the clipped objective and gradient-based optimization to improve the policy.
+
+**4. Update the Critic**  
+Updates its value predictions using targets derived from collected experience.
+
+**5. Repeat**  
+Collect new experience and train again until the policy improves or the training budget is reached.
+
+### Overall Workflow
+
+**Collect experience → Calculate advantages → Update actor and critic → Repeat.**
+
+
