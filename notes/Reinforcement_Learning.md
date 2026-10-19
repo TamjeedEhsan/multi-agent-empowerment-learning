@@ -110,4 +110,26 @@ Collect new experience and train again until the policy improves or the training
 
 **Collect experience → Calculate advantages → Update actor and critic → Repeat.**
 
+### GAE (Generalized Advantage Estimation)
+
+**Definition:** GAE estimates an action's advantage by combining TD errors across multiple time steps.
+
+**TD error:**
+
+\[
+\delta_t=r_t+\gamma V(s_{t+1})-V(s_t)
+\]
+
+**GAE formula:**
+
+\[
+\hat A_t=\sum_{l=0}^{\infty}(\gamma\lambda)^l\delta_{t+l}
+\]
+
+- \(\gamma\): Discount factor.
+- \(\lambda\): Controls the contribution of future TD errors.
+- GAE balances bias and variance when estimating advantages.
+
+**Role in PPO:** Provides advantage estimates used to calculate the clipped policy objective.
+
 
